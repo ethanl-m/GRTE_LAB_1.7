@@ -16,7 +16,7 @@ jobs:
         with:
           create_credentials_file: "true"
           # NOTE: this uses the *project number* (not the project id).
-          workload_identity_provider: "projects/654555968141/locations/global/workloadIdentityPools/iam-lab7-gh-pool/providers/iam-lab-7-gh-pool-oidc-provider"
+          workload_identity_provider: "projects/654555968141/locations/global/workloadIdentityPools/iam-lab-7-gh-pool/providers/iam-lab-7-gh-pool-oidc-provider"
           service_account: "iam-lab-7-target@gcp-labs-38f20hz2.iam.gserviceaccount.com"
       - name: "Set up gcloud"
         uses: "google-github-actions/setup-gcloud@v2"
