@@ -1,0 +1,26 @@
+name: Check GCP action
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  get_flag:
+    runs-on: ubuntu-latest
+    steps:
+      - id: "auth"
+        name: "Authenticate to GCP"
+        uses: "google-github-actions/auth@v2"
+        with:
+          create_credentials_file: "true"
+          # NOTE: this uses the *project number* (not the project id).
+          workload_identity_provider: "projects/654555968141/locations/global/workloadIdentityPools/iam-lab7-gh-pool/providers/iam-lab-7-gh-pool-oidc-provider"
+          service_account: "iam-lab-7-target@gcp-labs-38f20hz2.iam.gserviceaccount.com"
+      - name: "Set up gcloud"
+        uses: "google-github-actions/setup-gcloud@v2"
+      - name: "Read flag"
+        run: |-
+          gcloud config set project gcp-labs-38f20hz2
+          gcloud secrets versions access latest --secret=flag_iam_lab_7
